@@ -1,3 +1,37 @@
+<?php 
+	if (isset($_POST['edit'])) {
+		# code...
+		$tema = $_POST['themes'];
+		$bgColor = $_COOKIE[$tema .'_bgColor'];
+		$headingColor = $_COOKIE[$tema . '_headingColor'];
+		$paragraphColor = $_COOKIE[$tema . '_colorParagraph'];
+		$alignment = $_COOKIE[$tema . '_alignment'];
+		$fontSize = $_COOKIE[$tema . '_fontSize'];
+		
+	}
+
+?>
+<?php 
+        if (isset($_POST['submit']) && isset($_POST['name']) && isset($_POST['bgColor']) && isset($_POST['colorH1']) 
+		&& isset($_POST['colorParagraph']) && isset($_POST['fontSize'])) {
+			if (!isset($_POST['alignment'])) {
+				# code...
+				echo "<h3 style=\"color: red;\">Please select alignment!</h3>";
+			}else{
+				$themeName = $_POST['name'];
+				// Create a cookie with the theme name
+				setcookie("submit", "submit", time()+120);
+				setcookie('theme_' . $themeName, $themeName, time()+300);
+				setcookie($themeName .'_bgColor', $_POST['bgColor'], time()+300);
+				setcookie($themeName .'_headingColor', $_POST['colorH1'], time()+300);
+				setcookie($themeName .'_alignment', $_POST['alignment'], time()+300);
+				setcookie($themeName .'_colorParagraph', $_POST['colorParagraph'], time()+300);
+				setcookie($themeName . '_fontSize', $_POST['fontSize'], time()+300);
+			}
+            
+        }
+		
+    ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,58 +40,39 @@
 	<title>Edit Themes</title>
 </head>
 <body>
-	<form>
+	<form method="post" action="">
 		<label>Name of your theme :</label>
-		<input type="text" name="name">
+		<input type="text" name="name" value="<?php echo $tema;?>">
 		<br>
 		<br>
 		<label>Color of Page Background : </label>
-		<input type="color" name="colorBg">
+		<input type="color" name="colorBg" value="<?php echo $bgColor;?>">
 		<br>
 		<br>
 		<label>Color of Heading 1 : </label>
-		<input type="color" name="colorH1">
+		<input type="color" name="colorH1" value="<?php echo $headingColor;?>">
 		<br>
 		<br>
 		<label>Alignment of Heading 1</label>
 		<select name="alignment" size="1">
-			<option disabled selected>-- Choose the Alignment --</option>
-			<option value="right">Right</option>
-			<option value="center">Center</option>
-			<option value="left">Left</option>
-			<option value="justify">Justify</option>
+			<option disabled>-- Choose the Alignment --</option>
+			<option value="right" <?php echo ($alignment == 'right' ? ' selected' : '');?>>Right</option>
+			<option value="center" <?php echo ($alignment == 'center' ? ' selected' : '');?>>Center</option>
+			<option value="left" <?php echo ($alignment == 'left' ? ' selected' : '');?>>Left</option>
+			<option value="justify" <?php echo ($alignment == 'justify' ? ' selected' : '');?>>Justify</option>
 		</select>
 		<br>
 		<br>
 		<label>Color of Paragraph : </label>
-		<input type="color" name="colorParagraph">
+		<input type="color" name="colorParagraph" value="<?php echo $paragraphColor;?>">
 		<br>
 		<br>
 		<label>Font size of Paragraph : </label>
-		<input type="number" name="fontSize">px
+		<input type="number" name="fontSize" value="<?php echo $fontSize;?>">px
 		<br>
 		<br>
 		<input type="submit" name="submit">
 	</form>
-	<?php 
-		if (isset($_POST['submit'])) {
-    		$themeName = $_POST['name'];
-    		// Mengecek apakah cookie dengan nama tema sudah ada atau tidak
-    		if (!isset($_COOKIE[$themeName])) {
-        		// Jika belum ada, maka buat cookie baru dengan nama tema
-        		setcookie($themeName . '[bgColor]', $_POST['bgColor']);
-        		setcookie($themeName . '[headingColor]', $_POST['colorH1']);
-        		setcookie($themeName . '[alignment]', $_POST['alignment']);
-        		setcookie($themeName . '[colorParagraph]', $_POST['colorParagraph']);
-        		setcookie($themeName . '[fontSize]', $_POST['fontSize']);	
-    		}else{
-				echo "Theme name has already exist!";
-			}
-		}
-		foreach ($_COOKIE as $key => $value) {
-			# code...
-			echo $key;
-		}
-	 ?>
+	
 </body>
 </html>

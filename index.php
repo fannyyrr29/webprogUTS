@@ -26,25 +26,22 @@
 			}
 			p{
 				color: <?php echo $paragraphColor;?>;
-				font-size: <?php echo $fontSize; ?>;
+				font-size: <?php echo $fontSize; ?>px;
 			}
 			<?php endif; ?>
 		</style>
 </head>
 <body>
-	<?php 
-		$chosen = "";
-		if(isset($_POST['choosen'])){
-			$chosen = "index.php";
-		}
-		else if(isset($_POST['edit'])){
-			$chosen = "edit.php"; 
+	<?php
+		$choosen = "index.php";
+		if (isset($_POST['edit'])) {
+			$choosen = "edit.php";
 		}
 	?>
-	<form method="post" action="<?=$chosen;?>">
+	<form method="post" action="<?php echo $choosen;?>">
 		<label>Theme : </label>
-		<select size="1" name="themes" >
-			<option value="" disabled selected>--Choose Theme--</option>
+		<select size="1" name="themes" required >
+			<option value="" disabled selected hidden>--Choose Theme--</option>
 			<?php 
 			if (isset($_COOKIE['submit'])) {
 				foreach ($_COOKIE as $name => $value) {
@@ -64,7 +61,6 @@
 		<br>
 		<input type="submit" name="choosen" value="Choose The Theme">
 		<input type="submit" name="edit" value="Edit The Theme">
-
 	</form>
 	<hr>
 	<h1>Heading 1</h1>
