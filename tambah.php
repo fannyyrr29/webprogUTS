@@ -39,23 +39,18 @@
 		<br>	
 		<input type="submit" name="submit">
 	</form>
+	<a href="index.php">Return to Home Page</a>
 	<?php 
         if (isset($_POST['submit'])) {
             $themeName = $_POST['name'];
             // Create a cookie with the theme name
+            setcookie("submit", "submit", time()+120);
             setcookie('theme_' . $themeName, $themeName, time()+120);
-			setcookie($themeName . '[bgColor]', $_POST['bgColor'], time()+20);
-        	setcookie($themeName . '[headingColor]', $_POST['colorH1'], time()+20);
-        	setcookie($themeName . '[alignment]', $_POST['alignment'], time()+20);
-        	setcookie($themeName . '[colorParagraph]', $_POST['colorParagraph'], time()+20);
-        	setcookie($themeName . '[fontSize]', $_POST['fontSize'], time()+20);
-			if (isset($_COOKIE['theme_' . $themeName])) {
-				# code...
-				echo $_COOKIE['theme_' . $themeName];
-			}
-			else{
-				echo "Haven't set";
-			}
+			setcookie($themeName .'_bgColor', $_POST['bgColor'], time()+120);
+        	setcookie($themeName .'_headingColor', $_POST['colorH1'], time()+120);
+        	setcookie($themeName .'_alignment', $_POST['alignment'], time()+120);
+        	setcookie($themeName .'_colorParagraph', $_POST['colorParagraph'], time()+120);
+        	setcookie($themeName . '_fontSize', $_POST['fontSize'], time()+120);
         }
 		
     ?>
