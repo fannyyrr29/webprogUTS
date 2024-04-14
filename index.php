@@ -1,12 +1,3 @@
-<?php 
-	if (isset($_COOKIE['tema'])) {
-		# code...
-		$theme = json_decode($_COOKIE['tema'], true);
-		var_dump($theme);
-	}
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +10,15 @@
 		<label>Theme : </label>
 		<select size="1" >
 			<option value="" disabled selected>--Choose Theme--</option>
-				<option value=""></option>
+			<?php 
+				foreach ($_COOKIE as $name => $value) {
+					# code...
+					if ($name !== 'PHPSESSID' && strpos($name, 'theme_') === 0) {
+						# code...
+						echo "<option>$name</option>";
+					}
+				}
+			?>
 		</select>
 		<a href="tambah.php">Add New Theme</a>
 		<br>

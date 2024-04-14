@@ -39,5 +39,25 @@
 		<br>
 		<input type="submit" name="submit">
 	</form>
+	<?php 
+		if (isset($_POST['submit'])) {
+    		$themeName = $_POST['name'];
+    		// Mengecek apakah cookie dengan nama tema sudah ada atau tidak
+    		if (!isset($_COOKIE[$themeName])) {
+        		// Jika belum ada, maka buat cookie baru dengan nama tema
+        		setcookie($themeName . '[bgColor]', $_POST['bgColor']);
+        		setcookie($themeName . '[headingColor]', $_POST['colorH1']);
+        		setcookie($themeName . '[alignment]', $_POST['alignment']);
+        		setcookie($themeName . '[colorParagraph]', $_POST['colorParagraph']);
+        		setcookie($themeName . '[fontSize]', $_POST['fontSize']);	
+    		}else{
+				echo "Theme name has already exist!";
+			}
+		}
+		foreach ($_COOKIE as $key => $value) {
+			# code...
+			echo $key;
+		}
+	 ?>
 </body>
 </html>

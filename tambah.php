@@ -37,29 +37,28 @@
 		<input type="number" name="fontSize">px
 		<br>
 		<br>	
-		<input type="hidden" name="item[]">
 		<input type="submit" name="submit">
 	</form>
 	<?php 
-		$theme = array();
-		if (isset($_POST['submit'])) {
-    		$themeName = $_POST['name'];
-			array_push($theme, $themeName );
-    		// Mengecek apakah cookie dengan nama tema sudah ada atau tidak
-    		if (!isset($_COOKIE[$themeName])) {
-        		// Jika belum ada, maka buat cookie baru dengan nama tema
-        		setcookie($themeName . '[bgColor]', $_POST['bgColor']);
-        		setcookie($themeName . '[headingColor]', $_POST['colorH1']);
-        		setcookie($themeName . '[alignment]', $_POST['alignment']);
-        		setcookie($themeName . '[colorParagraph]', $_POST['colorParagraph']);
-        		setcookie($themeName . '[fontSize]', $_POST['fontSize']);	
-    		}
-			// setcookie("tema", json_encode($theme), time() + 3600);
-			print_r($theme);
-		}
+        if (isset($_POST['submit'])) {
+            $themeName = $_POST['name'];
+            // Create a cookie with the theme name
+            setcookie('theme_' . $themeName, $themeName, time()+120);
+			setcookie($themeName . '[bgColor]', $_POST['bgColor'], time()+20);
+        	setcookie($themeName . '[headingColor]', $_POST['colorH1'], time()+20);
+        	setcookie($themeName . '[alignment]', $_POST['alignment'], time()+20);
+        	setcookie($themeName . '[colorParagraph]', $_POST['colorParagraph'], time()+20);
+        	setcookie($themeName . '[fontSize]', $_POST['fontSize'], time()+20);
+			if (isset($_COOKIE['theme_' . $themeName])) {
+				# code...
+				echo $_COOKIE['theme_' . $themeName];
+			}
+			else{
+				echo "Haven't set";
+			}
+        }
 		
+    ?>
 
-		
-	 ?>
 </body>
 </html>
