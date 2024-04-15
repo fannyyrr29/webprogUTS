@@ -1,20 +1,43 @@
 <?php 
+	$choosen = ""; // menginisiasi $choosen variable
+	$bgColor = "";
+	$headingColor = "";
+	$paragraphColor = "";
+	$alignment = "";
+	$fontSize = "";
 	if (isset($_POST["choosen"])) {
-		# code...
-		$tema = $_POST['themes'];
+    	$tema = $_POST['themes'];
 		$bgColor = $_COOKIE[$tema .'_bgColor'];
 		$headingColor = $_COOKIE[$tema . '_headingColor'];
 		$paragraphColor = $_COOKIE[$tema . '_colorParagraph'];
 		$alignment = $_COOKIE[$tema . '_alignment'];
 		$fontSize = $_COOKIE[$tema . '_fontSize'];
+		$choosen = "index.php";
+	} else if(isset($_POST['edit'])){
+    	$choosen = "edit.php"; //mengubah $choosen menjadi edit.php
+	} else if(isset($_POST['submitEdit'])){
+		echo "cookie is made";
+		$newThemes = $_POST['nameEdit'];
+		$bgColor = $_COOKIE[$themes .'_bgColor'];
+		$headingColor = $_COOKIE[$newThemes . '_headingColor'];
+		$paragraphColor = $_COOKIE[$newThemes . '_colorParagraph'];
+		$alignment = $_COOKIE[$newThemes . '_alignment'];
+		$fontSize = $_COOKIE[$newThemes . '_fontSize'];
+		echo $themes;
+		echo $bgColor;
+		echo $headingColor;
+		echo $paragraphColor;
+		echo $alignment;
+		echo $fontSize;
 	}
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Project UTS Web Programming KP B</title>
+	<title>THEMES</title>
 		<style type="text/css">
 			<?php if(isset($_POST['choosen'])) : ?>
 			body{
@@ -32,12 +55,6 @@
 		</style>
 </head>
 <body>
-	<?php
-		$choosen = "index.php";
-		if (isset($_POST['edit'])) {
-			$choosen = "edit.php";
-		}
-	?>
 	<form method="post" action="<?php echo $choosen;?>">
 		<label>Theme : </label>
 		<select size="1" name="themes" required >
@@ -69,5 +86,4 @@
 		nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
 
 </body>
-
 </html>

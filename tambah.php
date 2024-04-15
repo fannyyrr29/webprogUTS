@@ -50,12 +50,12 @@
 				$themeName = $_POST['name'];
 				// Create a cookie with the theme name
 				setcookie("submit", "submit", time()+120);
-				setcookie('theme_' . $themeName, $themeName, time()+300);
-				setcookie($themeName .'_bgColor', $_POST['bgColor'], time()+300);
-				setcookie($themeName .'_headingColor', $_POST['colorH1'], time()+300);
-				setcookie($themeName .'_alignment', $_POST['alignment'], time()+300);
-				setcookie($themeName .'_colorParagraph', $_POST['colorParagraph'], time()+300);
-				setcookie($themeName . '_fontSize', $_POST['fontSize'], time()+300);
+				setcookie('theme_' . $themeName, $themeName, time()+3600);
+				setcookie($themeName .'_bgColor', $_POST['bgColor'], time()+3600);
+				setcookie($themeName .'_headingColor', $_POST['colorH1'], time()+3600);
+				setcookie($themeName .'_alignment', $_POST['alignment'], time()+3600);
+				setcookie($themeName .'_colorParagraph', $_POST['colorParagraph'], time()+3600);
+				setcookie($themeName . '_fontSize', $_POST['fontSize'], time()+3600);
 			}
             
         }
