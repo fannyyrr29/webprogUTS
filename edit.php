@@ -1,57 +1,40 @@
 <?php 
-	//mendapatkan nilai yang dikirimkan dari index.phps
 	if (isset($_POST['edit'])) {
 		# code...
 		$tema = $_POST['themes'];
-		$themeName = $_COOKIE['theme_' . $tema];
 		$bgColor = $_COOKIE[$tema .'_bgColor'];
 		$headingColor = $_COOKIE[$tema . '_headingColor'];
 		$paragraphColor = $_COOKIE[$tema . '_colorParagraph'];
 		$alignment = $_COOKIE[$tema . '_alignment'];
 		$fontSize = $_COOKIE[$tema . '_fontSize'];
+
+		//hapus cookie
+		setcookie("submit", "submit", time()-3600);
+		setcookie('theme_' . $tema, "", time()-3600);
+		setcookie($tema .'_bgColor', "", time()-3600);
+		setcookie($tema .'_headingColor', "", time()-3600);
+		setcookie($tema .'_alignment', "", time()-3600);
+		setcookie($tema .'_colorParagraph',"", time()-3600);
+		setcookie($tema . '_fontSize', "", time()-3600);
+	}elseif (isset($_POST['submit'])) {
+		# code...
+		$tema = $_POST['nameEdit'];
+		setcookie("submit", "submit", time()+3600);
+		setcookie('theme_' . $tema, $tema, time()+3600);
+		setcookie($tema .'_bgColor', $_POST['bgColorEdit'], time()+3600);
+		setcookie($tema .'_headingColor', $_POST['colorH1Edit'], time()+3600);
+		setcookie($tema .'_alignment', $_POST['alignmentEdit'], time()+3600);
+		setcookie($tema .'_colorParagraph',$_POST['colorParagraphEdit'], time()+3600);
+		setcookie($tema .'_fontSize', $_POST['fontSizeEdit'], time()+3600);
+
+		$bgColor = $_POST['bgColorEdit'];
+		$headingColor = $_POST['colorH1Edit'];
+		$paragraphColor = $_POST['colorParagraphEdit'];
+		$alignment = $_POST['alignmentEdit'];
+		$fontSize = $_POST['fontSizeEdit'];
+		
 	}
-	//ketika user menekan tombol submit
-	else if (isset($_POST['submitEdit'])) {
-		$newTheme = $_POST['nameEdit'];
-		if ($_POST['oldTheme'] !== "") {
-			# code...
-			$oldTheme = $_COOKIE['theme_' . $_POST['oldTheme']];
 
-		}
-
-		//destroy cookie ketika user mengubah nama tema
-		if ($oldTheme != $newTheme) {
-			// Delete old theme cookies
-			setcookie('theme_'. $oldTheme,"", time()-3600);
-			setcookie($oldTheme .'_bgColor', "", time()-3600);
-			setcookie($oldTheme .'_headingColor', "", time()-3600);
-			setcookie($oldTheme .'_alignment', "", time()-3600);
-			setcookie($oldTheme .'_colorParagraph', "", time()-3600);
-			setcookie($oldTheme . '_fontSize', "", time()-3600);
-			echo "cookie has been destroyed";
-		}
-		// membuat cookie baru dengan nama tema baru
-		setcookie('theme_'. $newTheme,$_POST['nameEdit'], time()+3600);
-		setcookie($newTheme .'_bgColor', $_POST['bgColorEdit'], time()+3600);
-		setcookie($newTheme .'_headingColor', $_POST['colorH1Edit'], time()+3600);
-		setcookie($newTheme .'_alignment', $_POST['alignmentEdit'], time()+3600);
-		setcookie($newTheme .'_colorParagraph', $_POST['colorParagraphEdit'], time()+3600);
-		setcookie($newTheme . '_fontSize', $_POST['fontSizeEdit'], time()+3600);
-
-		$tema = $_COOKIE['theme_' . $newTheme];
-		$bgColor = $_COOKIE[$newTheme .'_bgColor'];
-		$headingColor = $_COOKIE[$newTheme . '_headingColor'];
-		$paragraphColor = $_COOKIE[$newTheme . '_colorParagraph'];
-		$alignment = $_COOKIE[$newTheme . '_alignment'];
-		$fontSize = $_COOKIE[$newTheme . '_fontSize'];
-		echo $tema;
-		echo $bgColor;
-		echo $headingColor;
-		echo $paragraphColor;
-		echo $alignment;
-		echo $fontSize;
-
-    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -92,8 +75,7 @@
 		<input type="number" name="fontSizeEdit" value="<?php echo $fontSize;?>">px
 		<br>
 		<br>
-		<input type="hidden" name="oldTheme" value="<?php echo $old;?>">
-		<input type="submit" name="submitEdit">
+		<input type="submit" name="submit">
 	</form>
 	<a href="index.php">Return to HOME PAGE</a>
 </body>

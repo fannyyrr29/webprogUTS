@@ -49,7 +49,7 @@
 			}else{
 				$themeName = $_POST['name'];
 				// Create a cookie with the theme name
-				setcookie("submit", "submit", time()+120);
+				setcookie("submit", "submit", time()+3600);
 				setcookie('theme_' . $themeName, $themeName, time()+3600);
 				setcookie($themeName .'_bgColor', $_POST['bgColor'], time()+3600);
 				setcookie($themeName .'_headingColor', $_POST['colorH1'], time()+3600);

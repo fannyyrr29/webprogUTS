@@ -15,20 +15,6 @@
 		$choosen = "index.php";
 	} else if(isset($_POST['edit'])){
     	$choosen = "edit.php"; //mengubah $choosen menjadi edit.php
-	} else if(isset($_POST['submitEdit'])){
-		echo "cookie is made";
-		$newThemes = $_POST['nameEdit'];
-		$bgColor = $_COOKIE[$themes .'_bgColor'];
-		$headingColor = $_COOKIE[$newThemes . '_headingColor'];
-		$paragraphColor = $_COOKIE[$newThemes . '_colorParagraph'];
-		$alignment = $_COOKIE[$newThemes . '_alignment'];
-		$fontSize = $_COOKIE[$newThemes . '_fontSize'];
-		echo $themes;
-		echo $bgColor;
-		echo $headingColor;
-		echo $paragraphColor;
-		echo $alignment;
-		echo $fontSize;
 	}
 
 ?>
