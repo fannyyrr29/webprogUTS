@@ -8,16 +8,19 @@
 		$alignment = $_COOKIE[$tema . '_alignment'];
 		$fontSize = $_COOKIE[$tema . '_fontSize'];
 
-		//hapus cookie
-		setcookie("submit", "submit", time()-3600);
-		setcookie('theme_' . $tema, "", time()-3600);
-		setcookie($tema .'_bgColor', "", time()-3600);
-		setcookie($tema .'_headingColor', "", time()-3600);
-		setcookie($tema .'_alignment', "", time()-3600);
-		setcookie($tema .'_colorParagraph',"", time()-3600);
-		setcookie($tema . '_fontSize', "", time()-3600);
 	}elseif (isset($_POST['submit'])) {
-		# code...
+
+		//menghapus cookie lama
+		$theme = $_POST['old'];
+		setcookie("submit", "submit", time()-3600);
+		setcookie('theme_' . $theme, "", time()-3600);
+		setcookie($theme .'_bgColor', "", time()-3600);
+		setcookie($theme .'_headingColor', "", time()-3600);
+		setcookie($theme .'_alignment', "", time()-3600);
+		setcookie($theme .'_colorParagraph',"", time()-3600);
+		setcookie($theme . '_fontSize', "", time()-3600);
+		
+		//membuat cookie baru
 		$tema = $_POST['nameEdit'];
 		setcookie("submit", "submit", time()+3600);
 		setcookie('theme_' . $tema, $tema, time()+3600);
@@ -75,6 +78,7 @@
 		<input type="number" name="fontSizeEdit" value="<?php echo $fontSize;?>">px
 		<br>
 		<br>
+		<input type="hidden" name="old" value="<?php echo $tema;?>">
 		<input type="submit" name="submit">
 	</form>
 	<a href="index.php">Return to HOME PAGE</a>
