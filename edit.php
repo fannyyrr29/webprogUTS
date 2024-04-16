@@ -45,42 +45,72 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Edit Themes</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		body{
+			height: 100vh;
+			width: 100vw;
+		}
+		.container{
+			height: 100vh;
+			position: relative;
+		}
+		.form{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		<?php if(isset($_POST['submit'])) : ?>
+			form{
+				background-color: <?php echo $bgColor;?>;
+				padding: 10px;
+				border-radius: 10px;
+			} label{
+				color: <?php echo $paragraphColor;?>;
+			}
+		<?php endif; ?>
+	</style>
 </head>
 <body>
-	<form method="post" action="">
-		<label>Name of your theme :</label>
-		<input type="text" name="nameEdit" value="<?php echo $tema;?>">
-		<br>
-		<br>
-		<label>Color of Page Background : </label>
-		<input type="color" name="bgColorEdit" value="<?php echo $bgColor;?>">
-		<br>
-		<br>
-		<label>Color of Heading 1 : </label>
-		<input type="color" name="colorH1Edit" value="<?php echo $headingColor;?>">
-		<br>
-		<br>
-		<label>Alignment of Heading 1</label>
-		<select name="alignmentEdit" size="1">
-			<option disabled>-- Choose the Alignment --</option>
-			<option value="right" <?php echo ($alignment == 'right' ? ' selected' : '');?>>Right</option>
-			<option value="center" <?php echo ($alignment == 'center' ? ' selected' : '');?>>Center</option>
-			<option value="left" <?php echo ($alignment == 'left' ? ' selected' : '');?>>Left</option>
-			<option value="justify" <?php echo ($alignment == 'justify' ? ' selected' : '');?>>Justify</option>
-		</select>
-		<br>
-		<br>
-		<label>Color of Paragraph : </label>
-		<input type="color" name="colorParagraphEdit" value="<?php echo $paragraphColor;?>">
-		<br>
-		<br>
-		<label>Font size of Paragraph : </label>
-		<input type="number" name="fontSizeEdit" value="<?php echo $fontSize;?>">px
-		<br>
-		<br>
-		<input type="hidden" name="old" value="<?php echo $tema;?>">
-		<input type="submit" name="submit">
-	</form>
-	<a href="index.php">Return to HOME PAGE</a>
+	<div class="container">
+		<div class="form">
+			<form method="post" action="">
+			<label>Name of your theme :</label>
+			<input type="text" name="nameEdit" value="<?php echo $tema;?>">
+			<br>
+			<br>
+			<label>Color of Page Background : </label>
+			<input type="color" name="bgColorEdit" value="<?php echo $bgColor;?>">
+			<br>
+			<br>
+			<label>Color of Heading 1 : </label>
+			<input type="color" name="colorH1Edit" value="<?php echo $headingColor;?>">
+			<br>
+			<br>
+			<label>Alignment of Heading 1</label>
+			<select name="alignmentEdit" size="1">
+				<option disabled>-- Choose the Alignment --</option>
+				<option value="right" <?php echo ($alignment == 'right' ? ' selected' : '');?>>Right</option>
+				<option value="center" <?php echo ($alignment == 'center' ? ' selected' : '');?>>Center</option>
+				<option value="left" <?php echo ($alignment == 'left' ? ' selected' : '');?>>Left</option>
+				<option value="justify" <?php echo ($alignment == 'justify' ? ' selected' : '');?>>Justify</option>
+			</select>
+			<br>
+			<br>
+			<label>Color of Paragraph : </label>
+			<input type="color" name="colorParagraphEdit" value="<?php echo $paragraphColor;?>">
+			<br>
+			<br>
+			<label>Font size of Paragraph : </label>
+			<input type="number" name="fontSizeEdit" value="<?php echo $fontSize;?>">px
+			<br>
+			<br>
+			<input type="hidden" name="old" value="<?php echo $tema;?>">
+			<input type="submit" name="submit">
+			<a href="index.php">Return to HOME PAGE</a>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
