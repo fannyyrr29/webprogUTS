@@ -1,31 +1,42 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     $themeName = $_POST['nameEdit'];
+    $oldTheme = $_POST['oldThemes'];
 
-    // Handling the cookies to reflect changes immediately
-    $_COOKIE[$themeName . '_bgColor'] = $_POST['bgColorEdit'];
-    $_COOKIE[$themeName . '_headingColor'] = $_POST['colorH1Edit'];
-    $_COOKIE[$themeName . '_alignment'] = $_POST['alignmentEdit'];
-    $_COOKIE[$themeName . '_colorParagraph'] = $_POST['colorParagraphEdit'];
-    $_COOKIE[$themeName . '_fontSize'] = $_POST['fontSizeEdit'];
+    setcookie("submit", "", time()-3600);
+	setcookie('theme_' . $oldTheme, "", time()-3600);
+	setcookie($oldTheme .'_bgColor', "", time()-3600);
+	setcookie($oldTheme .'_headingColor', "", time()-3600);
+	setcookie($oldTheme .'_alignment', "", time()-3600);
+	setcookie($oldTheme .'_colorParagraph',"", time()-3600);
+	setcookie($oldTheme . '_fontSize', "", time()-3600);
 
     // Updating the cookies in the browser
+    setcookie("submit", "submit", time()+3600);
+    setcookie('theme_' . $themeName, $themeName, time()+3600);  
     setcookie($themeName . '_bgColor', $_POST['bgColorEdit'], time() + 3600);
     setcookie($themeName . '_headingColor', $_POST['colorH1Edit'], time() + 3600);
     setcookie($themeName . '_alignment', $_POST['alignmentEdit'], time() + 3600);
     setcookie($themeName . '_colorParagraph', $_POST['colorParagraphEdit'], time() + 3600);
     setcookie($themeName . '_fontSize', $_POST['fontSizeEdit'], time() + 3600);
 
-    header("Location: index.php");
-    exit;
+    $bgColor = $_POST['bgColorEdit'];
+    $headingColor = $_POST['colorH1Edit'];
+    $alignment = $_POST['alignmentEdit'];
+    $paragraphColor = $_POST['colorParagraphEdit'];
+    $fontSize = $_POST['fontSizeEdit'];
+
 }
-$themeName = isset($_GET['themes']) ? $_GET['themes'] : (isset($_POST['themes']) ? $_POST['themes'] : '');
-if ($themeName) {
+//mendapatkan tema yang dikirimkan oleh index.php
+if (isset($_GET['themes']) ? $_GET['themes'] : '') {
+    # code...
+    $themeName = isset($_GET['themes']) ? $_GET['themes'] : (isset($_POST['themes']) ? $_POST['themes'] : '');
     $bgColor = isset($_COOKIE[$themeName . '_bgColor']) ? $_COOKIE[$themeName . '_bgColor'] : '#FFFFFF';
     $headingColor = isset($_COOKIE[$themeName . '_headingColor']) ? $_COOKIE[$themeName . '_headingColor'] : '#000000';
     $paragraphColor = isset($_COOKIE[$themeName . '_colorParagraph']) ? $_COOKIE[$themeName . '_colorParagraph'] : '#000000';
     $alignment = isset($_COOKIE[$themeName . '_alignment']) ? $_COOKIE[$themeName . '_alignment'] : 'left';
     $fontSize = isset($_COOKIE[$themeName . '_fontSize']) ? $_COOKIE[$themeName . '_fontSize'] : '12';
+
 }
 ?>
 <!DOCTYPE html>
@@ -50,13 +61,11 @@ if ($themeName) {
             top:50%;
             left:50%;
             transform:translate(-50%, -50%);
-        }
-        form {
             background-color: <?php echo $bgColor; ?>;
             padding: 10px;
             border-radius: 10px;
         }
-        label {
+        label, a {
             color: <?php echo $paragraphColor; ?>;
         }
     </style>
@@ -65,6 +74,7 @@ if ($themeName) {
 <body>
     <div class="container">
         <div class="form">
+            <h1 style="color:<?php echo $headingColor; ?>;">Edit Theme</h1>
             <form method="post" action="edit.php">
                 <label>Name of your theme :</label>
                 <input type="text" name="nameEdit" value="<?php echo $themeName; ?>">
@@ -95,7 +105,7 @@ if ($themeName) {
                 <input type="number" name="fontSizeEdit" value="<?php echo $fontSize; ?>">px
                 <br>
                 <br>
-                <input type="hidden" name="themes" value="<?php echo htmlspecialchars($themeName); ?>">
+                <input type="hidden" name="oldThemes" value="<?php echo htmlspecialchars($themeName); ?>">
                 <input type="submit" name="submit" value="Save Changes">
                 <a href="index.php">Return to HOME PAGE</a>
             </form>
