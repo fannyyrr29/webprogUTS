@@ -63,11 +63,6 @@ if (isset($_POST["choosen"])) {
                 margin-top: 20px;
                 margin-bottom: -10px
             }
-
-            .button input[type="submit"] {
-                margin-top: -10px;
-            }
-
         }
 
         .form {
