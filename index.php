@@ -37,36 +37,8 @@ if (isset($_POST["choosen"])) {
             height: 50vh;
         }
 
-        @media (max-width: 1080px) {
-            .container {
-                grid-template-columns: 1fr;
-                padding: 20px;
-            }
-        }
-
-        @media (max-width: 450px) {
-            .form label {
-                display: block;
-                margin-bottom: 5px;
-            }
-
-            .form select {
-                width: 100%;
-                height: 40px;
-                border: 1px solid rgba(0, 0, 0, 0.3);
-                display: block;
-            }
-
-            .form a {
-                display: block;
-                text-align: center;
-                margin-top: 20px;
-                margin-bottom: -10px
-            }
-        }
-
         .form {
-            padding: 40px;
+            padding: 35px;
             margin: auto;
             box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
         }
@@ -129,6 +101,64 @@ if (isset($_POST["choosen"])) {
 
         .developer p {
             color: <?php echo $paragraphColor; ?>;
+        }
+
+        @media (max-width: 1080px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .form {
+                padding: 20px;
+            }
+
+            .form label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .form select {
+                width: 100%;
+                height: 40px;
+                border: 1px solid rgba(0, 0, 0, 0.3);
+                display: block;
+            }
+
+            .form a {
+                display: block;
+                text-align: center;
+                margin-top: 20px;
+                margin-bottom: -10px
+            }
+        }
+
+        @media (max-width: 350px) {
+            .form {
+                padding: 10px;
+            }
+
+            .form select {
+                width: 100%;
+                height: 35px;
+                justify-content: center;
+            }
+
+            .form a {
+                margin-top: 10px;
+                margin-bottom: -20px
+            }
+
+            .button {
+                gap: 10px;
+            }
+
+            .button input[type="submit"] {
+                padding: 5px;
+                height: 35px;
+            }
         }
     </style>
 </head>
