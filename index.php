@@ -61,6 +61,7 @@ if (isset($_POST["choosen"])) {
                 display: block;
                 text-align: center;
                 margin-top: 20px;
+                margin-bottom: -10px
             }
 
             .button input[type="submit"] {
@@ -92,6 +93,7 @@ if (isset($_POST["choosen"])) {
             justify-content: center;
             padding: 10px;
             height: 40px;
+            margin-top: 5px;
             border: 1px solid rgba(0, 0, 0, 0.3);
         }
 
